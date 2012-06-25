@@ -129,10 +129,10 @@ class Fluent::DataCounterOutput < Fluent::Output
             end
       counts['all'].each_with_index do |count,i|
         name = @patterns[i][1]
-        output[name + '_count'] = count
-        output[name + '_rate'] = ((count * 100.0) / (1.00 * step)).floor / 100.0
+        output[name + '_count'] = count.to_s()
+        output[name + '_rate'] = (((count * 100.0) / (1.00 * step)).floor / 100.0).to_s()
         unless i == 0 and @outcast_unmatched
-          output[name + '_percentage'] = count * 100.0 / (1.00 * sum) if sum > 0
+          output[name + '_percentage'] = (count * 100.0 / (1.00 * sum)).to_s() if sum > 0
         end
       end
       return output
